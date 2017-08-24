@@ -6,7 +6,6 @@ class Park extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            parkingData: [],
             parkingDataFiveMinutes: []
         }
 
@@ -17,23 +16,13 @@ class Park extends Component {
     }
     componentDidMount() {
 
-        var now = moment().format("YYYY/MM/DD/HH:mm").toString()
-        var nowMinutes = moment().format("HH:mm").toString()
-        var FiveMinAgo = moment().subtract(5, 'minutes').format("YYYY/MM/DD/HH:mm").toString()
+        //Moment library benyttet til at formatere tid, og trække fem minutter fra
+        //Tilføjet fem minutters "forsinkelse", da jeg oplevede problemer med at hente de sidste fem minutter fra "nu"
+        var nowMinutes = moment().subtract(5,'minutes').format("HH:mm").toString()
+        var FiveMinAgo = moment().subtract(10, 'minutes').format("YYYY/MM/DD/HH:mm").toString()
 
-        console.log("now: " + now)
-        console.log("now mins" + nowMinutes)
-        console.log("5 mins ago " + FiveMinAgo)
-        fetch('http://data.kk.dk/parking/latest/50')
-            .then((response) => response.json())
-            .then((json) => {
-                this.setState({ parkingData: json.results })
-            })
-            .catch((err) => {
-                // Handle error
-            })
         //loading takes time
-        fetch('http://data.kk.dk/parking/' + FiveMinAgo +"-"+nowMinutes)
+        fetch('http://data.kk.dk/parking/' + FiveMinAgo + "-" + nowMinutes)
             .then((response) => response.json())
             .then((json) => {
                 this.setState({ parkingDataFiveMinutes: json.results })
@@ -87,6 +76,9 @@ class Park extends Component {
                                 <td>
                                     <b>Valid until</b>
                                 </td>
+                                <td>
+                                    <b>Coordinates</b>
+                                </td>
                             </tr>
                             {
                                 parkingFiveMinutes.map((park) =>
@@ -97,7 +89,7 @@ class Park extends Component {
                                         <td>{park.sellingPointId}</td>
                                         <td>{park.validityBegin}</td>
                                         <td>{park.validityEnd}</td>
-
+                                        <td>{park.sellingPointLocation}</td>
                                     </tr>
 
                                 )

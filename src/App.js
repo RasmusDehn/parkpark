@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Park from './Park'
 
 
 class App extends Component {
+  renderParking() {
+    return <Park />
+  }
+
   render() {
     return (
       <div className="App">
@@ -12,7 +17,7 @@ class App extends Component {
           <h2>Park Park assignment</h2>
         </div>
         <p className="App-intro">
-          First React stuff
+          {this.renderParking()}
         </p>
       </div>
 

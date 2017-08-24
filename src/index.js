@@ -6,6 +6,6 @@ import Park from './Park';
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<Park />, document.getElementById('root'));
+//ReactDOM.render(<Park />, document.getElementById('root'));
 
 registerServiceWorker();
