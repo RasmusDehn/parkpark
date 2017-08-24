@@ -1,0 +1,10 @@
+td{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.underline{
+    text-decoration: underline;
+}
+.pointer{
+    cursor: pointer;
+}
